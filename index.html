@@ -5,36 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Films Controversy Archive</title>
 
-<!-- Cursive Font -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
     background-color: #111;
     color: white;
+    font-family: Arial, sans-serif;
     text-align: center;
 }
 
-/* Title */
 .archive-title {
     font-family: 'Playfair Display', cursive;
     font-size: 3rem;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin: 40px 0;
 }
 
-/* Carousel */
 .carousel {
     position: relative;
+    width: 80%;
     max-width: 900px;
-    margin: 40px auto;
+    margin: auto;
     overflow: hidden;
 }
 
 .carousel-images {
     display: flex;
+    width: 300%;
     transition: transform 0.5s ease-in-out;
 }
 
@@ -42,26 +40,24 @@ body {
     width: 100%;
     height: 500px;
     object-fit: cover;
-    flex-shrink: 0;
 }
 
-/* Arrows */
-.prev, .next {
+button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 2rem;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     color: white;
     border: none;
-    cursor: pointer;
+    font-size: 24px;
     padding: 10px 15px;
+    cursor: pointer;
 }
 
 .prev { left: 10px; }
 .next { right: 10px; }
 
-.prev:hover, .next:hover {
+button:hover {
     background: rgba(255,255,255,0.3);
 }
 </style>
@@ -72,53 +68,48 @@ body {
 <h1 class="archive-title">Films Controversy Archive</h1>
 
 <div class="carousel" id="carousel">
-    <div class="carousel-images" id="carouselImages">
-        <!-- IMPORTANT: Relative paths for GitHub -->
-        <img src="./images/image1.jpg" alt="Slide 1">
-        <img src="./images/image2.jpg" alt="Slide 2">
-        <img src="./images/image3.jpg" alt="Slide 3">
+    <div class="carousel-images" id="slides">
+        <img src="images/image1.jpg" alt="Slide 1">
+        <img src="images/image2.jpg" alt="Slide 2">
+        <img src="images/image3.jpg" alt="Slide 3">
     </div>
 
-    <button class="prev" onclick="moveSlide(-1)">❮</button>
-    <button class="next" onclick="moveSlide(1)">❯</button>
+    <button class="prev" onclick="changeSlide(-1)">❮</button>
+    <button class="next" onclick="changeSlide(1)">❯</button>
 </div>
 
 <script>
-let index = 0;
-const slides = document.getElementById("carouselImages");
-const totalSlides = slides.children.length;
-let autoSlide;
+let currentIndex = 0;
+const slides = document.getElementById("slides");
+const total = slides.children.length;
+let interval;
 
-function updateSlide() {
-    slides.style.transform = `translateX(-${index * 100}%)`;
+function update() {
+    slides.style.transform = "translateX(-" + (currentIndex * 100) + "%)";
 }
 
-function moveSlide(step) {
-    index += step;
-    if (index >= totalSlides) index = 0;
-    if (index < 0) index = totalSlides - 1;
-    updateSlide();
+function changeSlide(direction) {
+    currentIndex += direction;
+    if (currentIndex >= total) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = total - 1;
+    update();
 }
 
-function startAutoSlide() {
-    autoSlide = setInterval(() => {
-        moveSlide(1);
-    }, 3000); // 3 seconds
+function startAuto() {
+    interval = setInterval(() => {
+        changeSlide(1);
+    }, 3000);
 }
 
-function stopAutoSlide() {
-    clearInterval(autoSlide);
+function stopAuto() {
+    clearInterval(interval);
 }
 
-// Pause on hover
-const carousel = document.getElementById("carousel");
-carousel.addEventListener("mouseenter", stopAutoSlide);
-carousel.addEventListener("mouseleave", startAutoSlide);
+document.getElementById("carousel").addEventListener("mouseenter", stopAuto);
+document.getElementById("carousel").addEventListener("mouseleave", startAuto);
 
-// Start auto sliding
-startAutoSlide();
+startAuto();
 </script>
 
 </body>
 </html>
-
