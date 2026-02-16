@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Films Controversy Archive</title>
 
-    <!-- Google Fonts -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
@@ -24,9 +24,7 @@
             text-align: center;
         }
 
-        /* ======================
-           TITLE
-        ====================== */
+        /* ================= TITLE ================= */
 
         .home-title {
             font-family: "Great Vibes", cursive;
@@ -34,12 +32,48 @@
             margin-bottom: 40px;
         }
 
-        <h1>Test Image</h1>
-<img src="image1.jpg" style="width:400px;">
+        /* ================= CAROUSEL ================= */
 
-        /* ======================
-           BUTTONS
-        ====================== */
+        .carousel {
+            position: relative;
+            width: 900px;
+            max-width: 95%;
+            overflow: hidden;
+            margin-bottom: 50px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.6s ease;
+        }
+
+        .slides img {
+            flex-shrink: 0;
+            object-fit: cover;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+        }
+
+        .arrow:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        .left { left: 15px; }
+        .right { right: 15px; }
+
+        /* ================= BUTTONS ================= */
 
         .enter-button {
             background: black;
@@ -75,18 +109,14 @@
 
     <h1 class="home-title">Films Controversy Archive</h1>
 
-    <!-- IMAGE CAROUSEL -->
+    <!-- CAROUSEL -->
     <div class="carousel" id="carousel">
 
         <div class="slides" id="slides">
-            <!-- Replace with your images -->
-     
-    <img src="image1.jpg" alt="Slide 1">
-    <img src="image2.jpg" alt="Slide 2">
-    <img src="image3.jpg" alt="Slide 3">
-
-
-
+            <!-- Make sure these files exist in repo root -->
+            <img src="image1.jpg" alt="Slide 1">
+            <img src="image2.jpg" alt="Slide 2">
+            <img src="image3.jpg" alt="Slide 3">
         </div>
 
         <button class="arrow left" onclick="prevSlide()">❮</button>
@@ -109,9 +139,16 @@
     const totalSlides = images.length;
     let interval;
 
+    function updateWidth() {
+        slides.style.width = `${totalSlides * 100}%`;
+        images.forEach(img => {
+            img.style.width = `${100 / totalSlides}%`;
+        });
+    }
+
     function showSlide(i) {
         index = (i + totalSlides) % totalSlides;
-        slides.style.transform = `translateX(-${index * 100}%)`;
+        slides.style.transform = `translateX(-${index * (100 / totalSlides)}%)`;
     }
 
     function nextSlide() {
@@ -135,13 +172,9 @@
     carousel.addEventListener("mouseenter", stopAutoSlide);
     carousel.addEventListener("mouseleave", startAutoSlide);
 
+    updateWidth();
     startAutoSlide();
 </script>
 
 </body>
 </html>
-
-
-
-
-
