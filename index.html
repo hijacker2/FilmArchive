@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Film Controversy Archive</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Cursive Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            background: #f8f8f8;
+            font-family: "Inter", sans-serif;
+        }
+
+        .home-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .home-title {
+            font-family: "Great Vibes", cursive;
+            font-size: 56px;
+            margin-bottom: 30px;
+        }
+
+       /* ======================
+   RESPONSIVE CAROUSEL
+====================== */
+.carousel {
+    position: relative;
+    width: 900px;
+    max-width: 95%;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.6s ease;
+}
+
+.slides img {
+    width: 100%;
+    flex-shrink: 0;   /* important */
+    object-fit: cover;
+}
+
+
+        /* ======================
+           BUTTONS
+        ====================== */
+
+        .enter-button {
+            background: black;
+            color: white;
+            padding: 18px 50px;
+            font-size: 16px;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .enter-button:hover {
+            background: #444;
+        }
+
+        .secondary-links {
+            margin-top: 40px;
+        }
+
+        .method-link {
+            text-decoration: none;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .method-link:hover {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="home-wrapper">
+
+<h1 class="home-title">Films Controversy Archive</h1>
+
+<!-- IMAGE CAROUSEL -->
+<div class="carousel" id="carousel">
+
+    <div class="slides" id="slides">
+        <!-- Replace these images -->
+        <img src="images/image1.jpg" alt="Slide 1">
+        <img src="images/image2.jpg" alt="Slide 2">
+        <img src="images/image3.jpg" alt="Slide 3">
+    </div>
+
+    <button class="arrow left" onclick="prevSlide()">❮</button>
+    <button class="arrow right" onclick="nextSlide()">❯</button>
+
+</div>
+
+<a href="archive.html">
+    <button class="enter-button">ENTER ARCHIVE</button>
+</a>
+
+<div class="secondary-links">
+    <a href="methodology.html" class="method-link">View Methodology</a>
+</div>
+
+</div>
+
+<script>
+    let index = 0;
+    const slides = document.getElementById("slides");
+    const totalSlides = 3;
+    let interval;
+
+    function showSlide(i) {
+        index = (i + totalSlides) % totalSlides;
+        slides.style.transform = "translateX(-" + (index * 100) + "%)";
+    }
+
+    function nextSlide() {
+        showSlide(index + 1);
+    }
+
+    function prevSlide() {
+        showSlide(index - 1);
+    }
+
+    function startAutoSlide() {
+        interval = setInterval(() => {
+            nextSlide();
+        }, 3000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(interval);
+    }
+
+    const carousel = document.getElementById("carousel");
+
+    carousel.addEventListener("mouseenter", stopAutoSlide);
+    carousel.addEventListener("mouseleave", startAutoSlide);
+
+    startAutoSlide();
+</script>
+
+</body>
+</html>

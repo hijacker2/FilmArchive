@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Methodology – Film Controversy Archive</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- TOP NAVIGATION -->
+<div class="method-nav">
+    <a href="index.html" class="nav-link">← Home</a>
+    <a href="archive.html" class="nav-link">Enter Archive →</a>
+</div>
+
+<h1 class="method-title">Methodology</h1>
+
+<p class="method-intro">
+This digital archive examines how controversy surrounding selected Indian films unfolds temporally through media and institutional discourse. Rather than treating protest as reactive, the archive investigates how anticipatory discourse structures public reception prior to cinematic release.
+</p>
+
+<hr class="section-divider">
+
+<h2>1. Corpus Construction</h2>
+<p>
+Film-specific corpora were assembled using automated Google News RSS queries with disambiguated search strings. Articles were stored as structured CSV files containing publication date, headline, source, and URL. The archive preserves records as collected, without manual editorial removal.
+</p>
+
+<h2>2. Temporal Classification</h2>
+<p>
+Each article was classified relative to the official theatrical release date. Articles published on or before the release date are designated <strong>Pre-Release</strong>; those published after are categorized as <strong>Post-Release</strong>. This structure allows empirical investigation of anticipatory controversy and post-release normalization.
+</p>
+
+<h2>3. Computational Annotation</h2>
+<p>
+A rule-based natural language processing method was applied to headlines to generate two discursive signals:
+</p>
+
+<ul>
+<li><strong>Protest Score</strong> – identifies public controversy language.</li>
+<li><strong>Institutional Score</strong> – identifies governance or regulatory references.</li>
+</ul>
+
+<p>
+These scores function as computational metadata rather than interpretive sentiment analysis. They provide reproducible markers of discursive intensity.
+</p>
+
+<h2>4. Visualization Framework</h2>
+<p>
+Two visualization layers structure interpretation:
+</p>
+
+<ul>
+<li>A proportional pie chart showing overall protest versus institutional discourse.</li>
+<li>A temporal line graph plotting discursive intensity across publication dates, with theatrical release explicitly marked.</li>
+</ul>
+
+<p>
+Together, these components render visible the temporal architecture of controversy.
+</p>
+
+<h2>5. Theoretical Orientation</h2>
+<p>
+The archive draws conceptually on Jacques Derrida’s account of archival authority, Michel-Rolph Trouillot’s work on power and historical production, and Wolfgang Ernst’s media-archaeological emphasis on temporal inscription. By structuring media discourse computationally, the archive demonstrates how archival systems actively participate in the production of events.
+</p>
+
+<div class="method-footer">
+    Film Controversy Archive • 2026
+</div>
+
+</div>
+
+</body>
+</html>

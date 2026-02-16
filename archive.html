@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Film Controversy Archive</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+<a href="index.html" class="home-link">← Home</a>
+
+<div class="film-header">
+    <div id="filmTitle" class="film-title">Select a Film</div>
+    <div id="filmMeta" class="film-meta"></div>
+</div>
+
+<div class="visual-wrapper">
+    <div class="pie-box">
+        <canvas id="pieChart"></canvas>
+    </div>
+    <div class="line-box">
+        <canvas id="lineChart"></canvas>
+    </div>
+</div>
+
+<div class="controls">
+    <select id="filmSelect">
+        <option value="Lipstick_Cleaned.csv">Lipstick Under My Burkha</option>
+        <option value="Padmaavat_Cleaned.csv">Padmaavat</option>
+        <option value="VeereDiWedding_Cleaned.csv">Veere Di Wedding</option>
+        <option value="TheKeralaStory_Cleaned.csv">The Kerala Story</option>
+        <option value="Animal_Cleaned.csv">Animal</option>
+    </select>
+
+    <button onclick="loadArchive()">Load</button>
+
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="updateView()">
+
+    <button onclick="setPhase('All')">All</button>
+    <button onclick="setPhase('Pre')">Pre</button>
+    <button onclick="setPhase('Post')">Post</button>
+
+    <button onclick="setView('table')">Table</button>
+    <button onclick="setView('timeline')">Timeline</button>
+</div>
+
+<h2>Archive Records</h2>
+
+<table id="archiveTable">
+<thead>
+<tr>
+<th>Date</th>
+<th>Phase</th>
+<th>Headline</th>
+<th>Source</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+<div id="timelineView" style="display:none;"></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
