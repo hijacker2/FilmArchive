@@ -1,161 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Film Controversy Archive</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Films Controversy Archive</title>
 
-    <link rel="stylesheet" href="style.css">
+<!-- Cursive Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
 
-    <!-- Cursive Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: white;
+    text-align: center;
+}
 
-    <style>
-        body {
-            margin: 0;
-            background: #f8f8f8;
-            font-family: "Inter", sans-serif;
-        }
+/* Title */
+.archive-title {
+    font-family: 'Playfair Display', cursive;
+    font-size: 3rem;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
 
-        .home-wrapper {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .home-title {
-            font-family: "Great Vibes", cursive;
-            font-size: 56px;
-            margin-bottom: 30px;
-        }
-
-       /* ======================
-   RESPONSIVE CAROUSEL
-====================== */
+/* Carousel */
 .carousel {
     position: relative;
-    width: 900px;
-    max-width: 95%;
+    max-width: 900px;
+    margin: 40px auto;
     overflow: hidden;
-    margin-bottom: 40px;
 }
 
-.slides {
+.carousel-images {
     display: flex;
-    transition: transform 0.6s ease;
+    transition: transform 0.5s ease-in-out;
 }
 
-.slides img {
+.carousel-images img {
     width: 100%;
-    flex-shrink: 0;   /* important */
+    height: 500px;
     object-fit: cover;
+    flex-shrink: 0;
 }
 
+/* Arrows */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+}
 
-        /* ======================
-           BUTTONS
-        ====================== */
+.prev { left: 10px; }
+.next { right: 10px; }
 
-        .enter-button {
-            background: black;
-            color: white;
-            padding: 18px 50px;
-            font-size: 16px;
-            letter-spacing: 2px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        .enter-button:hover {
-            background: #444;
-        }
-
-        .secondary-links {
-            margin-top: 40px;
-        }
-
-        .method-link {
-            text-decoration: none;
-            color: #777;
-            font-size: 14px;
-        }
-
-        .method-link:hover {
-            color: black;
-        }
-    </style>
+.prev:hover, .next:hover {
+    background: rgba(255,255,255,0.3);
+}
+</style>
 </head>
 
 <body>
 
-<div class="home-wrapper">
+<h1 class="archive-title">Films Controversy Archive</h1>
 
-<h1 class="home-title">Films Controversy Archive</h1>
-
-<!-- IMAGE CAROUSEL -->
 <div class="carousel" id="carousel">
-
-    <div class="slides" id="slides">
-        <!-- Replace these images -->
-        <img src="images/image1.jpg" alt="Slide 1">
-        <img src="images/image2.jpg" alt="Slide 2">
-        <img src="images/image3.jpg" alt="Slide 3">
+    <div class="carousel-images" id="carouselImages">
+        <!-- IMPORTANT: Relative paths for GitHub -->
+        <img src="./images/image1.jpg" alt="Slide 1">
+        <img src="./images/image2.jpg" alt="Slide 2">
+        <img src="./images/image3.jpg" alt="Slide 3">
     </div>
 
-    <button class="arrow left" onclick="prevSlide()">❮</button>
-    <button class="arrow right" onclick="nextSlide()">❯</button>
-
-</div>
-
-<a href="archive.html">
-    <button class="enter-button">ENTER ARCHIVE</button>
-</a>
-
-<div class="secondary-links">
-    <a href="methodology.html" class="method-link">View Methodology</a>
-</div>
-
+    <button class="prev" onclick="moveSlide(-1)">❮</button>
+    <button class="next" onclick="moveSlide(1)">❯</button>
 </div>
 
 <script>
-    let index = 0;
-    const slides = document.getElementById("slides");
-    const totalSlides = 3;
-    let interval;
+let index = 0;
+const slides = document.getElementById("carouselImages");
+const totalSlides = slides.children.length;
+let autoSlide;
 
-    function showSlide(i) {
-        index = (i + totalSlides) % totalSlides;
-        slides.style.transform = "translateX(-" + (index * 100) + "%)";
-    }
+function updateSlide() {
+    slides.style.transform = `translateX(-${index * 100}%)`;
+}
 
-    function nextSlide() {
-        showSlide(index + 1);
-    }
+function moveSlide(step) {
+    index += step;
+    if (index >= totalSlides) index = 0;
+    if (index < 0) index = totalSlides - 1;
+    updateSlide();
+}
 
-    function prevSlide() {
-        showSlide(index - 1);
-    }
+function startAutoSlide() {
+    autoSlide = setInterval(() => {
+        moveSlide(1);
+    }, 3000); // 3 seconds
+}
 
-    function startAutoSlide() {
-        interval = setInterval(() => {
-            nextSlide();
-        }, 3000);
-    }
+function stopAutoSlide() {
+    clearInterval(autoSlide);
+}
 
-    function stopAutoSlide() {
-        clearInterval(interval);
-    }
+// Pause on hover
+const carousel = document.getElementById("carousel");
+carousel.addEventListener("mouseenter", stopAutoSlide);
+carousel.addEventListener("mouseleave", startAutoSlide);
 
-    const carousel = document.getElementById("carousel");
-
-    carousel.addEventListener("mouseenter", stopAutoSlide);
-    carousel.addEventListener("mouseleave", startAutoSlide);
-
-    startAutoSlide();
+// Start auto sliding
+startAutoSlide();
 </script>
 
 </body>
 </html>
+
